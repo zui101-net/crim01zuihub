@@ -17,7 +17,7 @@ local Window = Rayfield:CreateWindow({
    KeySettings = {
       Title = "01_ZUI Hub",
       Subtitle = "01_ZUI Key System",
-      Note = "",
+      Note = "This is the TORSO-LOCK version.",
       FileName = "Key123", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
       SaveKey = false, -- The user's key will be saved, but if you change the key, they will be unable to use your script
       GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
@@ -42,7 +42,7 @@ local AimlockToggle = Tab:CreateToggle({
 getgenv().AimPart = "Torso"
 getgenv().AimRadius = 100
 getgenv().FirstPerson = true 
-getgenv().TeamCheck = true
+getgenv().TeamCheck = false
 getgenv().PredictMovement = predictmovementtoggle
 getgenv().PredictionVelocity = 16 
 
