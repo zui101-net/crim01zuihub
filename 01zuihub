@@ -3292,7 +3292,7 @@ noclip() -- to toggle noclip() and clip()
 })
 
 local PremiumButton = Tab:CreateButton({
-   Name = "Click Tp[Q]",
+   Name = "Teleport Press 'T'",
    Callback = function()
 plr = game.Players.LocalPlayer
  
