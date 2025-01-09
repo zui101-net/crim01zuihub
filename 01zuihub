@@ -1770,7 +1770,7 @@ end
 
 local function checkPlayer(player)
     if table.find(blacklist, string.lower(player.Name)) then
-        game.Players.LocalPlayer:Kick("Stinky Staff joined the server - Femboyshub")
+        game.Players.LocalPlayer:Kick("Criminality Staff Has joined your server.")
     end
 end
 
