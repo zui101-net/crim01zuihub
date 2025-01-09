@@ -17,7 +17,7 @@ local Window = Rayfield:CreateWindow({
    KeySettings = {
       Title = "01_ZUI Hub",
       Subtitle = "01_ZUI Key System",
-      Note = "This is the HEADLOCK version.",
+      Note = "This is the TORSOLOCK version.",
       FileName = "Key123", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
       SaveKey = false, -- The user's key will be saved, but if you change the key, they will be unable to use your script
       GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
@@ -199,7 +199,7 @@ local checkifmouse2button = Uis.InputBegan:Connect(function(Key)
                 print(Target)
                 AimlockTarget = Target
                 if cannotifytoggle then
-                    Notify("Azure Hub", "Aimlock Target: "..tostring(AimlockTarget), "", 3)
+                    Notify("Torso Lock", "Aimlock Target: "..tostring(AimlockTarget), "", 3)
                 end
             end   
         end
@@ -3304,7 +3304,7 @@ mouse = plr:GetMouse()
  
 mouse.KeyDown:connect(function(key)
  
-if key == "q" then
+if key == "t" then
  
 if mouse.Target then
  
@@ -3320,7 +3320,7 @@ end)
 local Tab = Window:CreateTab("Credits", nil) -- Title, Image
 local CreditsSection = Tab:CreateSection("Credits")
 local Button = Tab:CreateButton({
-   Name = "01_ZUI Server Server",
+   Name = "01_ZUI Server",
    Callback = function()
    setclipbord("https://discord.gg/bw9hRFDsjR")
    end,
