@@ -199,7 +199,7 @@ local checkifmouse2button = Uis.InputBegan:Connect(function(Key)
                 print(Target)
                 AimlockTarget = Target
                 if cannotifytoggle then
-                    Notify("Azure Hub", "Aimlock Target: "..tostring(AimlockTarget), "", 3)
+                    Notify("Head Lock", "Aimlock Target: "..tostring(AimlockTarget), "", 3)
                 end
             end   
         end
@@ -3304,7 +3304,7 @@ mouse = plr:GetMouse()
  
 mouse.KeyDown:connect(function(key)
  
-if key == "q" then
+if key == "t" then
  
 if mouse.Target then
  
@@ -3320,7 +3320,7 @@ end)
 local Tab = Window:CreateTab("Credits", nil) -- Title, Image
 local CreditsSection = Tab:CreateSection("Credits")
 local Button = Tab:CreateButton({
-   Name = "01_ZUI Server Server",
+   Name = "01_ZUI Server",
    Callback = function()
    setclipbord("https://discord.gg/bw9hRFDsjR")
    end,
