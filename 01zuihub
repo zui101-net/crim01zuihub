@@ -1747,7 +1747,7 @@ local Section = Tab:CreateSection("Chat")
 local Button2 = Tab:CreateButton({
    Name = "Chat Spy",
    Callback = function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/LisSploit/FemboysHubChat/main/Spy"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/zui101-net/crim01zuihub/refs/heads/main/zuichatspy"))()
    end,
 })
 local Section = Tab:CreateSection("Combat")
@@ -3320,8 +3320,8 @@ end)
 local Tab = Window:CreateTab("Credits", nil) -- Title, Image
 local CreditsSection = Tab:CreateSection("Credits")
 local Button = Tab:CreateButton({
-   Name = "Discord Server",
+   Name = "01_ZUI Server Server",
    Callback = function()
-   setclipbord("https://discord.gg/YzqjRB83TN")
+   setclipbord("https://discord.gg/bw9hRFDsjR")
    end,
 })
