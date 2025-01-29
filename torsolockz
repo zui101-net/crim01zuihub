@@ -5,7 +5,7 @@ local Window = Rayfield:CreateWindow({
    LoadingSubtitle = "By ZUI",
    ConfigurationSaving = {
       Enabled = true,
-      FolderName = Femmy, -- Create a custom folder for your hub/game
+      FolderName = ZuiMomento2, -- Create a custom folder for your hub/game
       FileName = "Big Hub"
    },
    Discord = {
@@ -3292,7 +3292,7 @@ noclip() -- to toggle noclip() and clip()
 })
 
 local PremiumButton = Tab:CreateButton({
-   Name = "Teleport Press 'T'",
+   Name = "Teleport Press 'M'",
    Callback = function()
 plr = game.Players.LocalPlayer
  
@@ -3304,7 +3304,7 @@ mouse = plr:GetMouse()
  
 mouse.KeyDown:connect(function(key)
  
-if key == "t" then
+if key == "m" then
  
 if mouse.Target then
  
