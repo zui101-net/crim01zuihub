@@ -42,7 +42,7 @@ local AimlockToggle = Tab:CreateToggle({
 getgenv().AimPart = "Head"
 getgenv().AimRadius = 100
 getgenv().FirstPerson = true 
-getgenv().TeamCheck = true
+getgenv().TeamCheck = false
 getgenv().PredictMovement = predictmovementtoggle
 getgenv().PredictionVelocity = 16 
 
