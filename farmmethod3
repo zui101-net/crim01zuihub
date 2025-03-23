@@ -13,15 +13,15 @@ local LocalPlayer = Players.LocalPlayer
 --    1. Создаём ScreenGui и основное окно (mainFrame)
 -------------------------------------------------------------------------------
 local screenGui = Instance.new("ScreenGui")
-screenGui.Name = "VenomHubScreenGui"
+screenGui.Name = "FarmingMethod3"
 screenGui.ResetOnSpawn = false
 screenGui.Parent = LocalPlayer:WaitForChild("PlayerGui")
 
 local mainFrame = Instance.new("Frame")
-mainFrame.Name = "VenomHubMainFrame"
+mainFrame.Name = "FarmingHubMainFrame"
 mainFrame.Size = UDim2.new(0, 320, 0, 390)
 mainFrame.Position = UDim2.new(0.05, 0, 0.1, 0)
-mainFrame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+mainFrame.BackgroundColor3 = Color3.fromRGB(14, 14, 14)
 mainFrame.BorderSizePixel = 2
 mainFrame.Visible = false  -- по умолчанию скрыто, открывать клавишей [K]
 mainFrame.Active = true
@@ -97,7 +97,7 @@ end
 --    3. Клавиша [K] для показа/скрытия
 -------------------------------------------------------------------------------
 UserInputService.InputBegan:Connect(function(input, gp)
-    if not gp and input.KeyCode == Enum.KeyCode.K then
+    if not gp and input.KeyCode == Enum.KeyCode.N then
         mainFrame.Visible = not mainFrame.Visible
     end
 end)
@@ -279,71 +279,6 @@ local function AdminCheck_Disable()
     AdminCheck_Coroutine = nil
 end
 
---======================= Deleted Mob<3 =========================--
-local DeletedMob_Ran = false
-local function DeletedMob_RunOnce()
-    if DeletedMob_Ran then return end
-    DeletedMob_Ran = true
-
-    local success, err = pcall(function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/Mick-gordon/Hyper-Escape/main/DeleteMobV2.lua", true))()
-    end)
-    if not success then
-        warn("[Deleted Mob<3] Ошибка: ", err)
-    end
-end
-
---========================== Anti AFK ===========================--
-local AntiAFK_Enabled = false
-local AntiAFK_IdledConnection
-local AntiAFK_Coroutine
-
-local function AntiAFK_DoAction()
-    pcall(function()
-        VirtualUser:CaptureController()
-        VirtualUser:SetKeyDown('0x20')  -- пробел
-        task.wait(0.1)
-        VirtualUser:SetKeyUp('0x20')
-    end)
-    pcall(function()
-        local camera = workspace.CurrentCamera
-        camera.CFrame = camera.CFrame * CFrame.Angles(math.rad(0.5), 0, 0)
-        task.wait(0.1)
-        camera.CFrame = camera.CFrame * CFrame.Angles(math.rad(-0.5), 0, 0)
-    end)
-end
-
-local function AntiAFK_Enable()
-    if AntiAFK_Enabled then return end
-    AntiAFK_Enabled = true
-
-    local player = LocalPlayer
-    AntiAFK_IdledConnection = player.Idled:Connect(function()
-        if AntiAFK_Enabled then
-            AntiAFK_DoAction()
-        end
-    end)
-
-    AntiAFK_Coroutine = coroutine.create(function()
-        while AntiAFK_Enabled do
-            AntiAFK_DoAction()
-            task.wait(30)
-        end
-    end)
-    coroutine.resume(AntiAFK_Coroutine)
-end
-
-local function AntiAFK_Disable()
-    if not AntiAFK_Enabled then return end
-    AntiAFK_Enabled = false
-
-    if AntiAFK_IdledConnection then
-        AntiAFK_IdledConnection:Disconnect()
-        AntiAFK_IdledConnection = nil
-    end
-    AntiAFK_Coroutine = nil
-end
-
 --=================== Melee Aura 4 Alt MAX! =====================--
 local MeleeAura_Enabled = false
 local MeleeAura_Connection
@@ -437,7 +372,7 @@ end
 
 --======================= Teleport Farm =========================--
 local TPFarm_Enabled = false
-local TPFarm_TargetName = "selimkarakutuk296"
+local TPFarm_TargetName = ""
 
 -- Сохраняем все подключения, чтобы отключать при Disable
 local TPFarm_SteppedConnection = nil
@@ -532,111 +467,6 @@ local function TPFarm_Disable()
     end
 end
 
---================= 3 Save-кнопки (Cube/Vibecheck/Mountain) =======
-local event = DeathRespawn_Event  -- Сократим название
-
--- 1) Save Cube
-local SaveCube_Enabled = false
-local SaveCube_Connection
-local SaveCube_Position = Vector3.new(-4184.4, 102.7, 276.9)
-
-local function SaveCube_Enable()
-    if SaveCube_Enabled then return end
-    SaveCube_Enabled = true
-
-    SaveCube_Connection = RunService.RenderStepped:Connect(function()
-        if not SaveCube_Enabled then return end
-        local char = LocalPlayer.Character
-        if char then
-            local hrp = char:FindFirstChild("HumanoidRootPart")
-            local hum = char:FindFirstChildOfClass("Humanoid")
-            if hrp then
-                hrp.CFrame = CFrame.new(SaveCube_Position)
-            end
-            if hum and hum.Health <= 0 then
-                event:InvokeServer("KMG4R904") -- авто возрождение
-            end
-        end
-    end)
-end
-
-local function SaveCube_Disable()
-    if not SaveCube_Enabled then return end
-    SaveCube_Enabled = false
-    if SaveCube_Connection then
-        SaveCube_Connection:Disconnect()
-        SaveCube_Connection = nil
-    end
-end
-
--- 2) Save Vibecheck
-local SaveVibe_Enabled = false
-local SaveVibe_Connection
-local SaveVibe_Position = Vector3.new(-4857.5, -161.5, -918.3)
-
-local function SaveVibe_Enable()
-    if SaveVibe_Enabled then return end
-    SaveVibe_Enabled = true
-
-    SaveVibe_Connection = RunService.RenderStepped:Connect(function()
-        if not SaveVibe_Enabled then return end
-        local char = LocalPlayer.Character
-        if char then
-            local hrp = char:FindFirstChild("HumanoidRootPart")
-            local hum = char:FindFirstChildOfClass("Humanoid")
-            if hrp then
-                hrp.CFrame = CFrame.new(SaveVibe_Position)
-            end
-            if hum and hum.Health <= 0 then
-                event:InvokeServer("KMG4R904")
-            end
-        end
-    end)
-end
-
-local function SaveVibe_Disable()
-    if not SaveVibe_Enabled then return end
-    SaveVibe_Enabled = false
-    if SaveVibe_Connection then
-        SaveVibe_Connection:Disconnect()
-        SaveVibe_Connection = nil
-    end
-end
-
--- 3) Save Mountain
-local SaveMount_Enabled = false
-local SaveMount_Connection
-local SaveMount_Position = Vector3.new(-5169.8, 102.6, -515.5)
-
-local function SaveMount_Enable()
-    if SaveMount_Enabled then return end
-    SaveMount_Enabled = true
-
-    SaveMount_Connection = RunService.RenderStepped:Connect(function()
-        if not SaveMount_Enabled then return end
-        local char = LocalPlayer.Character
-        if char then
-            local hrp = char:FindFirstChild("HumanoidRootPart")
-            local hum = char:FindFirstChildOfClass("Humanoid")
-            if hrp then
-                hrp.CFrame = CFrame.new(SaveMount_Position)
-            end
-            if hum and hum.Health <= 0 then
-                event:InvokeServer("KMG4R904")
-            end
-        end
-    end)
-end
-
-local function SaveMount_Disable()
-    if not SaveMount_Enabled then return end
-    SaveMount_Enabled = false
-    if SaveMount_Connection then
-        SaveMount_Connection:Disconnect()
-        SaveMount_Connection = nil
-    end
-end
-
 -------------------------------------------------------------------------------
 --    5. Функция создания строки (createToggleRow) для кнопок
 -------------------------------------------------------------------------------
@@ -670,7 +500,7 @@ local function createToggleRow(parent, scriptName, canToggle, isEnabledFn, onEna
     bindButton.TextSize = 16
     bindButton.Text = "Bind"
     bindButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-    bindButton.BackgroundColor3 = Color3.fromRGB(90, 90, 90)
+    bindButton.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
     bindButton.Parent = frame
 
     local function updateToggleButton()
@@ -681,10 +511,10 @@ local function createToggleRow(parent, scriptName, canToggle, isEnabledFn, onEna
         end
         if isEnabledFn() then
             button.Text = "ON"
-            button.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+            button.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
         else
             button.Text = "OFF"
-            button.BackgroundColor3 = Color3.fromRGB(170, 0, 0)
+            button.BackgroundColor3 = Color3.fromRGB(0, 0 ,0)
         end
     end
     updateToggleButton()
@@ -832,42 +662,12 @@ do
     )
 end
 
--- 3) Deleted Mob<3 (одноразово)
-createToggleRow(
-    contentFrame,
-    "Deleted Mob<3",
-    false,
-    function() return DeletedMob_Ran end,
-    DeletedMob_RunOnce,
-    function() end,
-    (function()
-        local onceBind = nil
-        return function() return onceBind end,
-               function(k) onceBind = k end
-    end)()
-)
-
--- 4) Anti AFK
-do
-    local antiAFKBind = nil
-    createToggleRow(
-        contentFrame,
-        "Anti AFK",
-        true,
-        function() return AntiAFK_Enabled end,
-        AntiAFK_Enable,
-        AntiAFK_Disable,
-        function() return antiAFKBind end,
-        function(k) antiAFKBind = k end
-    )
-end
-
 -- 5) Melee Aura 4 Alt MAX!
 do
     local meleeBind = nil
     createToggleRow(
         contentFrame,
-        "Melee Aura 4 Alt MAX!",
+        "Melee Aura",
         true,
         function() return MeleeAura_Enabled end,
         MeleeAura_Enable,
@@ -891,51 +691,6 @@ do
         function(k) tpBind = k end
     )
     createTPFarmTargetRow(contentFrame)
-end
-
--- 7) Save Cube
-do
-    local scBind = nil
-    createToggleRow(
-        contentFrame,
-        "Save Cube",
-        true,
-        function() return SaveCube_Enabled end,
-        SaveCube_Enable,
-        SaveCube_Disable,
-        function() return scBind end,
-        function(k) scBind = k end
-    )
-end
-
--- 8) Save Vibecheck
-do
-    local svBind = nil
-    createToggleRow(
-        contentFrame,
-        "Save Vibecheck",
-        true,
-        function() return SaveVibe_Enabled end,
-        SaveVibe_Enable,
-        SaveVibe_Disable,
-        function() return svBind end,
-        function(k) svBind = k end
-    )
-end
-
--- 9) Save Mountain
-do
-    local smBind = nil
-    createToggleRow(
-        contentFrame,
-        "Save Mountain",
-        true,
-        function() return SaveMount_Enabled end,
-        SaveMount_Enable,
-        SaveMount_Disable,
-        function() return smBind end,
-        function(k) smBind = k end
-    )
 end
 
 --//////////////////////////////////////////////////// end
